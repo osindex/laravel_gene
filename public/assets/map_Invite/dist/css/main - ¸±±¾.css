@@ -1,0 +1,476 @@
+
+html,body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    font-size: 3.125vw;
+    overflow: hidden; 
+}
+
+body {
+    overflow: hidden;
+}
+
+
+/* Input */
+
+.input-group {
+  position: relative;
+  margin-bottom: 2rem;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  text-align: center;
+}
+
+.input-group .input-group-addon {
+    padding: 0rem 1rem;
+    line-height: 3rem;
+    font-size: 1rem;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    box-sizing: border-box;
+    height: 3rem;
+    width: 30%;
+}
+
+.input-group input {
+    padding: 0 .7rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-left: 0px;
+    height: 3rem;
+    box-sizing: border-box;
+    border-radius: 0 5px 5px 0;
+    width: 70%;
+}
+
+/* Button */
+
+.s_btn1 {
+    
+}
+
+/* scene1 */
+
+#scene1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    z-index: 2;
+    -webkit-perspective:800;
+    perspective:800;
+}
+
+#scene1 > .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/s1_bg.png);
+    background-size: 100%;
+    z-index: -1;
+}
+
+/** 信封 **/
+
+#scene1 > .envelop {    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 96vw;
+    height: 45vh;
+}
+
+#scene1 > .envelop > .front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    box-sizing: border-box;
+    background: #eddfd1;
+    border: 1px #eae1d5 solid;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6), 0 2px 3px -2px rgba(0, 0, 0, 0.6);
+    padding: 1.2rem;
+    color: #837362;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+
+#scene1 > .envelop > .front > .dcode > span {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin-right:0.5rem; 
+    text-align: center;
+    font-size: 1rem;
+    color: #000;
+    border:1px solid #da0000 ;
+}
+
+#scene1 > .envelop > .front > .stamp {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 30%;
+    max-width: 100px;
+}
+
+#scene1 > .envelop > .front > .wxname {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#scene1 > .envelop > .front > .wxname > h2 {
+    font-size: 2.4rem;
+} 
+
+#scene1 > .envelop > .front > .logo {
+    position: absolute;
+    bottom: 1.5rem;
+    left:1.5rem;
+        width: 30%;
+    max-width: 328px;
+}
+
+#scene1 > .envelop > .front > .unseal {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    z-index: 5;
+    font-size:1.2rem;
+}
+
+#scene1 > .envelop > .front > .scode {
+    position: absolute;
+    bottom: .5rem;
+    right: 1.2rem;
+}
+
+#scene1 > .envelop > .back {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #eddfd1;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6), 0 2px 3px -2px rgba(0, 0, 0, 0.6);
+    padding: 1.2rem;
+    color: #837362;
+}
+
+#scene1 > .envelop > .back > .seal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    text-align: center;
+    background: #eddfd1;
+    border-radius: 6px 6px 12px 12px;
+    box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6), 0 2px 3px -2px rgba(0, 0, 0, 0.6);
+    -webkit-transform-origin:top center;
+            transform-origin:top center;
+    z-index: 10;
+
+}
+
+
+
+#scene1 > .envelop > .back > .seal > img {
+    width: 40%;
+}
+
+#scene1 > .envelop > .back > .innerbg {
+    background: #837362;
+    width: 100%;
+    height: 35%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 6px 6px 0 0;
+    border: 1.5rem solid #988877;
+    box-sizing: border-box;
+    border-bottom: 0;
+    border-top: 0;
+}
+
+#scene1 > .envelop > .back > .seal.after {
+    border: 1.5rem solid #988877;
+    border-top: 0px;
+    box-sizing: border-box;
+    background: #837362 !important;
+    box-shadow: none !important;
+}
+
+/* 信件内容 */
+
+#scene1 > .letter {
+    opacity: 0;
+    position: absolute;
+    top: -25.5%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 87vw;
+    height: 12vh;
+    z-index: -1;
+    background: #fcf1dd;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+#scene1 > .letter.after {
+    border-radius: 5px;
+}
+#letter1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem 1.2rem;
+    box-sizing: border-box;
+}
+
+#letter1 > .introimg {
+    text-align: center;
+}
+
+#letter1 > .introimg img {
+    max-height: 35vh;
+}
+
+#letter1 > p {
+    font-size: 1.6rem;
+    text-indent: 2em;
+    color: #474747;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    line-height: 1.5em;
+}
+
+#startmap {
+    display: none;
+    width: 50%;
+    height: 3rem;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #FFA726;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    cursor: pointer;
+}
+
+#letter2 {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    background: #FCF1DD;
+    color: #000;
+}
+
+#letter2 h2 {
+    font-size: 1.8rem;
+    color: #000;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#worldmap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 49.6875%;
+    background: #ccc;
+}
+
+#worldmap .mapwrapper {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background: url(../img/worldmap.png);
+    background-size: 100%;
+}
+
+.location {
+    opacity: 0;
+    position: absolute;
+    font-size: 1rem;
+    color: #FFFFFF;
+    border-left: 0.4rem solid #FF9800;
+    padding: 0.2rem 0.4rem;
+    background: #00BCD4;
+}
+
+#loc1 {
+        top: 30%;
+    right: 5%;
+}
+
+#loc2 {
+        top: 25%;
+    left: 30%;
+}
+
+#loc3 {
+    top: 20%;
+    left: 45%;
+}
+#loc4 {
+    top: 12%;
+    left: 4%;
+}
+#loc5 {
+        top: 16%;
+    right: 24%;
+}
+
+#loc6 {
+        bottom: 15%;
+    right: 0%;
+}
+
+#loc7 {
+        top: 34%;
+    left: 15%;
+}
+#loc8 {
+        top: 35%;
+    right: 15%;
+}
+
+#loc9 {
+        bottom: 20%;
+    left: 36%;
+}
+
+#loc10 {
+    bottom: 40%;
+    left: 62%;
+}
+
+#worldcount {
+    position: absolute;
+    height: 50%;
+    text-align: center;
+}
+
+#worldcount p {
+    opacity: 0;
+    margin-top: 3vh;
+    font-size: 1.5rem;
+}
+
+#worldcount p.floor {
+    margin-top: 0vh;
+    font-size: 1rem;
+}
+
+#chinacount {
+    position: absolute;
+    height: 50%;
+    text-align: center;
+}
+
+#chinacount p {
+    opacity: 0;
+    margin-top: 3vh;
+    font-size: 1.5rem;
+}
+
+#chinacount p.floor {
+    margin-top: 0vh;
+    font-size: 1rem;
+}
+
+
+#joinit {
+    width: 50%;
+    height: 3rem;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #FFA726;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+#letter3 {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    background: #FCF1DD;
+    color: #000;
+    text-align: center;
+}
+
+
+#letter3 h2 {
+    font-size: 1.8rem;
+    color: #000;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#mymap {
+    width: 100%;
+    position: relative;
+}
+
+#mymap p{
+    margin-top: .5rem;
+    font-size: 1.2rem; 
+}
+
+#mymap img {
+    border-radius: 5px; 
+}
+
+#infobox {
+    position: relative;
+    width: 100%;
+    height: 40%;
+    text-align: center;
+}

@@ -1,0 +1,205 @@
+'use strict';
+
+$(document).ready(function(){
+    /* Global Variables */
+    $.Velocity.mock = 0.8;
+    var envelop_front = $("#envelop_front"),
+        envelop = $('#envelop'),
+        envelop_back = $('#envelop_back'),
+        envelop_back_img = $('.envelop .back img'),
+        envelop_seal = $('#envelop_seal'),
+        s_letter = $('#s_letter'),
+        start_map = $("#startmap"),
+        letter1 = $('#letter1'),
+        letter2 = $('#letter2'),
+        letter3 = $('#letter3'),
+        join_it = $("#joinit"),
+        mymap = $("#mymap"),
+        infobox_input = $("#infobox input"),
+        light_map = $("#lightmap"),
+        show_loc_int;
+
+    /* Const */
+    var AFTER_D_CODE = '<span class="dib">6</span><span class="dib">2</span><span class="dib">5</span><span class="dib">0</span><span class="dib">1</span><span class="dib">4</span>'
+
+    /* Global Functions */
+
+    function showRandomLoc(nmax) {
+        var rnum = Math.ceil(Math.random()*nmax);
+        var rloc = "#loc"+rnum;
+        $(rloc)
+            .velocity("transition.bounceIn",600)
+            .velocity("transition.fadeOut",{duration:600,delay:Math.ceil(Math.random()*3000)});
+    }
+
+    function setEnvelopAfter() {
+
+    }
+
+    infobox_input
+        .on("focus",function(){
+            mymap.hide();
+        })
+        .on("blur",function(){
+            mymap.show();
+        })
+
+    /* ACTION */
+    ;envelop_front.one('touchstart',function(){
+
+        var seq1 = [
+            { 
+                e: envelop_front, 
+                p: { rotateY:[90,'liner',0]}, 
+                o: { duration: 600 } 
+            },
+            { 
+                e: envelop_back, 
+                p: {opacity:[1,0],rotateY:[0,-90],begin: function(elements) { envelop_front.hide();}}, 
+                o: { duration: 600,delay:540,sequenceQueue:false} 
+            },
+            { 
+                e: s_letter, 
+                p: {zIndex:2}, 
+                o: { sequenceQueue: false} 
+            },
+            { 
+                e: envelop_seal, 
+                p: {rotateX:[180,0]}, 
+                o: { duration: 800} 
+            },
+            { 
+                e: envelop_back_img, 
+                p: {opacity:[0,1]}, 
+                o: { duration: 0,sequenceQueue: false,delay: 400,complete: function(elements) { envelop_seal.addClass('after');}} 
+            },
+            { 
+                e: s_letter, 
+                p: {opacity:[1,0]}, 
+                o: { duration: 300,sequenceQueue: false} 
+            },
+            { 
+                e: envelop, 
+                p: {opacity:[0,1],translateY:'100%'}, 
+                o: { duration: 800} 
+            },
+            { 
+                e: s_letter, 
+                p: { height:['90vh','12vh'],top:[0,'-25.5%']}, 
+                o: { duration: 800,sequenceQueue: false,begin: function(elements) { s_letter.addClass('after');}, complete: function() { start_map.velocity("transition.slideDownIn",600);}}
+             }
+        ];
+        $.Velocity.RunSequence(seq1);
+    });
+
+    start_map.one('touchstart',function(){
+        var worldcount = $('#worldcount'),
+            worldcountp = $('#worldcount .center-body p'),
+            chinacount = $('#chinacount'),
+            chinacountp = $('#chinacount .center-body p')
+            
+        ;letter2.velocity("transition.slideDownIn",{
+            duration: 1200,
+            complete:function(e) {
+                letter1.remove();
+                showRandomLoc(10);
+                show_loc_int = setInterval(function(){showRandomLoc(10);},1000);
+                worldcountp.velocity('transition.shrinkIn',{
+                        stagger:300,
+                        duration:600,
+                        complete:function(e) { 
+                            worldcount.velocity('transition.whirlOut',{
+                                duration:800,
+                                delay:4000,
+                                complete:function(){
+                                    join_it.velocity("transition.slideDownIn",400);
+                                    chinacountp.velocity('transition.shrinkIn',{stagger:300})
+                                }
+                            });
+                        }
+                    }
+                );
+            }
+        });
+    });
+
+    join_it.one('touchstart',function() {
+        clearInterval(show_loc_int);
+        letter3.velocity("transition.slideDownIn",{
+            duration:1200,
+            complete:function(e) {
+                light_map.velocity("transition.slideDownIn",400);
+                letter2.remove();
+                $('#ae_name').html('西南石油大学收');
+                $('#ae_unseal').remove();
+                $('#ae_dcode').html(AFTER_D_CODE);
+                $('#ae_scode').remove();
+            }
+        });
+    });
+
+    light_map.one('touchstart',function() {
+
+        var seq2 = [
+            {
+                e:light_map,
+                p: {opacity:[0,1]}, 
+                o: { duration: 300} 
+            },
+            {
+                e:envelop,
+                p: {opacity:[1,0],translateY:[0,'100%']}, 
+                o: { duration: 600} 
+            },
+            {
+                e:s_letter,
+                p:{ height:['12vh','90vh'],top:['-25.5%',0]},
+                o:{ duration:600,sequenceQueue: false,begin:function(){s_letter.removeClass('after')}}
+            },
+            { 
+                e: envelop_seal, 
+                p: {rotateX:[0,180]}, 
+                o: { duration: 600} 
+            },
+            { 
+                e: envelop_back_img, 
+                p: {opacity:[1,0]}, 
+                o: { duration: 0,sequenceQueue: false,delay: 300,complete: function(elements) { envelop_seal.removeClass('after');}} 
+            },
+            { 
+                e: s_letter, 
+                p: {opacity:[0,1]}, 
+                o: {sequenceQueue: false,complete:function(){s_letter.remove();}} 
+            },
+            { 
+                e: envelop_back, 
+                p: { rotateY:[-90,0]}, 
+                o: { duration: 500} 
+            },
+            { 
+                e: envelop_front, 
+                p: { rotateY:[0,'liner',90]}, 
+                o: { duration: 500 ,begin:function(elements) { envelop_front.show();envelop_back.remove();}} 
+            },
+            { 
+                e: envelop, 
+                p: { rotateX:[60,'liner',0],translateY:['30%',0],scale:[1.1,1]}, 
+                o: { duration: 400} 
+            },
+            { 
+                e: envelop, 
+                p: { translateY:['-100%','20%'],scale:[0.01,1]}, 
+                o: { duration: 500} 
+            },
+            { 
+                e: $('#scene1 .bg'), 
+                p: { opacity:[0,1]}, 
+                o: { duration: 500,sequenceQueue: false,delay:400} 
+            },
+        ];
+
+        $.Velocity.RunSequence(seq2);
+    });
+
+    
+});
