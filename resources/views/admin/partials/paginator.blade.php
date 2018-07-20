@@ -1,18 +1,49 @@
-<?php
-$presenter = new \Illuminate\Pagination\BootstrapThreePresenter($paginator);
-?>
-@if ($paginator->lastPage() > 1)
-<ul class="pagination">
-    <?php echo $presenter->render(); ?>   
+@if ($paginator->hasPages())
+    <ul class="pagination" role="navigation">
+        {{-- Previous Page Link --}}
+        @if ($paginator->onFirstPage())
+            <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                <span aria-hidden="true">&lsaquo;</span>
+            </li>
+        @else
+            <li>
+                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+            </li>
+        @endif
+
+        {{-- Pagination Elements --}}
+        @foreach ($elements as $element)
+            {{-- "Three Dots" Separator --}}
+            @if (is_string($element))
+                <li class="disabled" aria-disabled="true"><span>{{ $element }}</span></li>
+            @endif
+
+            {{-- Array Of Links --}}
+            @if (is_array($element))
+                @foreach ($element as $page => $url)
+                    @if ($page == $paginator->currentPage())
+                        <li class="active" aria-current="page"><span>{{ $page }}</span></li>
+                    @else
+                        <li><a href="{{ $url }}">{{ $page }}</a></li>
+                    @endif
+                @endforeach
+            @endif
+        @endforeach
+
+        {{-- Next Page Link --}}
+        @if ($paginator->hasMorePages())
+            <li>
+                <a href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+            </li>
+        @else
+            <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                <span aria-hidden="true">&rsaquo;</span>
+            </li>
+        @endif
 </ul>
 <div style="display: inline-block;margin: 20px 0;border-radius: 4px;width:150px;padding:2px 2px 2px 20px;">
     <form action="{{$paginator->url(0)}}">
     <div class="input-group input-group-sm">
-        @if(!empty($param))
-        @foreach($param as $k=>$v)
-        <input type="hidden" value="{{$v}}" name="{{$k}}" >
-        @endforeach
-        @endif
         <input class="form-control"  type="number" name="page" min="0" max="<?php echo $paginator->lastPage(); ?>" value="<?php echo $paginator->currentPage(); ?>" placeholder="页 #">
         <span class="input-group-btn">
           <button type="submit" class="btn btn-default btn-flat">跳转</button>
@@ -21,3 +52,4 @@ $presenter = new \Illuminate\Pagination\BootstrapThreePresenter($paginator);
   </form>
 </div>
 @endif
+

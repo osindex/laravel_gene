@@ -1,82 +1,661 @@
 <nav id="sidebar">
-  <div id="sidebar-scroll">
-    <div class="sidebar-content">
-      <div class="side-header side-content bg-white-op">
-        <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
-          <i class="fa fa-times"></i>
-        </button>
-        <div class="btn-group pull-right">
-          <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
-            <i class="si si-drop"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
-            <li>
-              <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
-                <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
-                <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="theme" data-theme="assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
-                <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="theme" data-theme="assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
-                <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="theme" data-theme="assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
-                <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
-                <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <a class="h5 text-white" href="index.html">
-          <i class="fa fa-rocket text-primary"></i> &nbsp<span class="h5 font-w600 sidebar-mini-hide text-gray"> 校友平台</span>
-        </a>
-      </div>
+    <!-- Sidebar Scroll Container -->
+    <div id="sidebar-scroll">
+        <!-- Sidebar Content -->
+        <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+        <div class="sidebar-content">
+            <!-- Side Header -->
+            <div class="side-header side-content bg-white-op">
+                <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
+                <div class="btn-group pull-right">
+                    <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
+                        <i class="si si-drop"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
+                        <li>
+                            <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">默认</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">紫晶</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">澄红</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">平绿</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">黛蓝</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">华粉</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="h5 text-white" href="{{route('admin')}}">
+                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">{{config('backname','GENE')}}</span>
+                </a>
+            </div>
+            <!-- END Side Header -->
 
-      <div class="side-content">
-        <ul class="nav-main">
-          <li>
-            <a href="{{url('home')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">后台首页</span></a>
-          </li>
-          <li class="nav-main-heading"><span class="sidebar-mini-hide">校友活动</span></li>
-<!--           <li>
-            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-badge"></i><span class="sidebar-mini-hide">点亮校友地图活动</span></a>
-            <ul>
-             <li><a href="/admin/wechatinfo">所有校友列表</a></li>
-             <li><a href="/admin/wechatinfo/map">校友地图</a></li>
-           </ul>
-         </li>
-         <li><a href="/admin/smile"><i class="fa fa-smile-o"></i> <span class="sidebar-mini-hide">笑脸接力</span></a></li> -->
-         <li><a href="/admin/iambacknew"><i class="fa fa-edit"></i> <span class="sidebar-mini-hide">校友信息填报</span></a></li>
-         <li><a href="/admin/funding"><i class="fa fa-list"></i> <span class="sidebar-mini-hide">校庆捐赠列表</span></a></li>
-         <li><a href="/admin/fundingoffline"><i class="fa fa-list"></i> <span class="sidebar-mini-hide">校庆捐赠列表 (线下)</span></a></li>
-         @if(Auth::user()->hasRole('admin'))
-         <li class="nav-main-heading"><span class="sidebar-mini-hide">管理区域</span></li>
-         <li><a href="/admin/fundingproject"><i class="fa fa-university"></i> <span class="sidebar-mini-hide">捐赠项目管理</span></a></li>
-         <li><a href="/admin/event"><i class="fa fa-modx"></i> <span class="sidebar-mini-hide">活动管理</span></a></li>
-         <li><a href="/admin/users"><i class='fa fa-users'></i> <span class="sidebar-mini-hide">用户管理</span></a></li>
-         <li><a href="/admin/roles"><i class='fa fa-list'></i> <span class="sidebar-mini-hide">角色管理</span></a></li>
-         @endif
-         <li class="nav-main-heading"><span class="sidebar-mini-hide">其他</span></li>
-         <li>
-           <a href="/" target="blank"><i class="si si-rocket"></i><span class="sidebar-mini-hide"> 前台</span></a>
-         </li>
-       </ul>
-     </div>
-   </div>
- </div>
+            <!-- Side Content -->
+            <div class="side-content side-content-full">
+                <ul class="nav-main">
+                    @php
+                    $menus = config('menu');
+                    // dd($menus);
+                    // 只写二级菜单
+                    @endphp
+                    @foreach($menus as $menu)
+                    @if($menu['class']=='nav-main-heading')
+                        <li class="nav-main-heading"><span class="sidebar-mini-hide">{{$menu['title']}}</span></li>
+                    @else
+                        <li>
+                        @if($menu['children'])
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="{{$menu['class']}}"></i><span class="sidebar-mini-hide">{{$menu['title']}}</span></a>
+                            <ul>
+                            @foreach($menu['children'] as $msec)
+                            <li><a href="{{$msec['url']}}"><i class="{{$msec['class']}}"></i>{{$msec['title']}}</a></li>
+                            @endforeach
+                            </ul>
+                        @else
+                            <a href="{{$menu['url']}}"><i class="{{$menu['class']}}"></i><span class="sidebar-mini-hide">{{$menu['title']}}</span></a>
+                        @endif
+                        </li>
+                    @endif
+                    @endforeach
+                    <!-- <li>
+                        <a href="base_pages_dashboard_v2.html"><i class="si si-rocket"></i><span class="sidebar-mini-hide">Dashboard v2</span></a>
+                    </li>
+                    <li>
+                        <a href="base_pages_dashboard_v3.html"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard v3</span></a>
+                    </li> -->
+                    <!-- <li class="nav-main-heading"><span class="sidebar-mini-hide">User Interface</span></li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-badge"></i><span class="sidebar-mini-hide">UI Elements</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_ui_widgets.html">Widgets</a>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Blocks</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_ui_blocks.html">Styles</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_ui_blocks_api.html">Blocks API</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_ui_blocks_draggable.html">Draggable</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="base_ui_grid.html">Grid</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_typography.html">Typography</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_icons.html">Icons</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_buttons.html">Buttons</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_activity.html">Activity</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_tabs.html">Tabs</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_tiles.html">Tiles</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_cards.html">Cards</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_ribbons.html">Ribbons</a>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Chat</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_ui_chat_full.html">Full</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_ui_chat_fixed.html">Fixed</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_ui_chat_popup.html">Popup</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Timeline</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_ui_timeline.html">Various</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_ui_timeline_social.html">Social</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="base_ui_navigation.html">Navigation</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_modals_tooltips.html">Modals &amp; Tooltips</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_color_themes.html">Color Themes</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="open">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-grid"></i><span class="sidebar-mini-hide">Tables</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_tables_styles.html">Styles</a>
+                            </li>
+                            <li>
+                                <a class="active" href="base_tables_responsive.html">Responsive</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_tools.html">Tools</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_pricing.html">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_datatables.html">DataTables</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-note"></i><span class="sidebar-mini-hide">Forms</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_forms_premade.html">Pre-made</a>
+                            </li>
+                            <li>
+                                <a href="base_forms_elements.html">Elements</a>
+                            </li>
+                            <li>
+                                <a href="base_forms_pickers_more.html">Pickers &amp; More</a>
+                            </li>
+                            <li>
+                                <a href="base_forms_editors.html">Text Editors</a>
+                            </li>
+                            <li>
+                                <a href="base_forms_validation.html">Validation</a>
+                            </li>
+                            <li>
+                                <a href="base_forms_wizard.html">Wizard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Develop</span></li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Components</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_comp_images.html">Images</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_image_cropper.html">Image Cropper</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_charts.html">Charts (Various)</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_chartjs_v2.html">Charts.js v2</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_calendar.html">Calendar</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_sliders.html">Sliders</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_animations.html">Animations</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_scrolling.html">Scrolling</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_syntax_highlighting.html">Syntax Highlighting</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_rating.html">Rating</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_treeview.html">Tree View</a>
+                            </li>
+                            <li>
+                                <a href="base_comp_masonry.html">Masonry</a>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Maps</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_comp_maps.html">Google</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_comp_maps_full.html">Google Full</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_comp_maps_vector.html">Vector</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Gallery</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_comp_gallery_simple.html">Simple</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_comp_gallery_advanced.html">Advanced</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-magic-wand"></i><span class="sidebar-mini-hide">Layouts</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_layouts_api.html">Layout API</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_default.html">Default</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_default_flipped.html">Default Flipped</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_header_static.html">Static Header</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_sidebar_mini_hoverable.html">Mini Sidebar (Hoverable)</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_side_overlay_hoverable.html">Side Overlay (Hoverable)</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_side_overlay_open.html">Side Overlay (Open)</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_side_native_scrolling.html">Side Native Scrolling</a>
+                            </li>
+                            <li>
+                                <a href="base_layouts_sidebar_hidden.html">Hidden Sidebar</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-puzzle"></i><span class="sidebar-mini-hide">Multi Level Menu</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">Link 1-1</a>
+                            </li>
+                            <li>
+                                <a href="#">Link 1-2</a>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Sub Level 2</a>
+                                <ul>
+                                    <li>
+                                        <a href="#">Link 2-1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Link 2-2</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-submenu" data-toggle="nav-submenu" href="#">Sub Level 3</a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Link 3-1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Link 3-2</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Sub Level 4</a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">Link 4-1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Link 4-2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-submenu" data-toggle="nav-submenu" href="#">Sub Level 5</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#">Link 5-1</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Link 5-2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="nav-submenu" data-toggle="nav-submenu" href="#">Sub Level 6</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="#">Link 6-1</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Link 6-2</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Pages</span></li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-layers"></i><span class="sidebar-mini-hide">Generic</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_pages_blank.html">Blank</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_search.html">Search Results</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_invoice.html">Invoice</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_inbox.html">Inbox</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_files.html">Files</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_tickets.html">Tickets</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_contacts.html">Contacts</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_team.html">Team</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_about.html">About</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_upgrade_plan.html">Upgrade Plan</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_contact.html">Contact</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_support.html">Support</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_coming_soon.html">Coming Soon</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_coming_soon_v2.html">Coming Soon v2</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_maintenance.html">Maintenance</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-layers"></i><span class="sidebar-mini-hide">Page Packs</span></a>
+                        <ul>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-bitcoin"></i>Crypto</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_crypto_dashboard.html">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_crypto_buy_sell.html">Buy/Sell</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_crypto_wallets.html">Wallets</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_crypto_settings.html">Edit</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bag"></i>e-Commerce</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_ecom_dashboard.html">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_orders.html">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_order.html">Order</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_products.html">Products</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_product_edit.html">Product Edit</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_customer.html">Customer</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-handbag"></i>e-Commerce Store</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_ecom_store_home.html">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_store_search.html">Search Results</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_store_products.html">Products List</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_store_product.html">Product Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_ecom_store_checkout.html">Checkout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-user"></i>User Profile</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_profile.html">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_profile_v2.html">Profile v2</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_profile_edit.html">Profile Edit</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bubbles"></i>Forum</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_forum_categories.html">Categories</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_forum_topics.html">Topics</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_forum_discussion.html">Discussion</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_forum_new_topic.html">New Topic</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-briefcase"></i>Projects</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_projects_dashboard.html">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_projects_view.html">Project</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_projects_create.html">Create</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_projects_edit.html">Edit</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-pencil"></i>Blog</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_blog_classic.html">Classic</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_blog_list.html">List</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_blog_grid.html">Grid</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_blog_story.html">Story</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_blog_story_cover.html">Story Cover</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-graduation"></i>e-Learning</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_elearning_courses.html">Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_elearning_course.html">Course</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_elearning_lesson.html">Lesson</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-plane"></i>Travel</a>
+                                <ul>
+                                    <li>
+                                        <a href="base_pages_travel_agency.html">Agency</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_travel_package.html">Package</a>
+                                    </li>
+                                    <li>
+                                        <a href="base_pages_travel_guide.html">Guide</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-lock"></i><span class="sidebar-mini-hide">Authentication</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_pages_auth.html">All Pages</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_login.html">Log In</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_login_v2.html">Log In v2</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_register.html">Register</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_register_v2.html">Register v2</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_lock.html">Lock Screen</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_lock_v2.html">Lock Screen v2</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_reminder.html">Password Reminder</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_reminder_v2.html">Password Reminder v2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-fire"></i><span class="sidebar-mini-hide">Error Pages</span></a>
+                        <ul>
+                            <li>
+                                <a href="base_pages_errors.html">All Pages</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_400.html">400</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_401.html">401</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_403.html">403</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_404.html">404</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_500.html">500</a>
+                            </li>
+                            <li>
+                                <a href="base_pages_503.html">503</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- END Side Content -->
+        </div>
+        <!-- Sidebar Content -->
+    </div>
+    <!-- END Sidebar Scroll Container -->
 </nav>
