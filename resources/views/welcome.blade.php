@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{config('app.name')}} - GENE</title>
+    <title>GENE - Sicau</title>
 
     <!-- Fonts -->
     <link href="https://fonts.proxy.ustclug.org/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
             text-align: center;
         }
         .title {
-            font-size: 80px;
+            font-size: 150px;
             color: #00bdf4;
         }
         .links > a {
@@ -62,7 +62,7 @@
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
-                <a href="{{ url('/home') }}">主页</a>
+                <a href="{{ url('/') }}">主页</a>
                 @else
                     <a href="{{ route('login') }}">登录</a>
                     <a href="{{ route('register') }}">注册</a>
@@ -72,11 +72,11 @@
 
     <div class="content">
 
-        <div class="title m-b-md">基因数据库 - GENE</div>
+        <div class="title m-b-md">GENE - Sicau</div>
 
         <div class="links">
             <a href="/">首页 - index</a>
-            <a href="{{ route('login') }}">后台 - manager</a>
+            <a href="{{ route('admin') }}">后台 - manager</a>
         </div>
     </div>
 </div>
