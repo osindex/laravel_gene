@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model;
 
-class News extends Model
-{
-    protected $table = "news";
+class News extends Model {
+	protected $table = "news";
 	protected $guarded = [];
 }

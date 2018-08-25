@@ -13,19 +13,20 @@ class Controller extends BaseController {
 	public function upload(Request $request) {
 		// dd(apiAuth(),$request->user(), \Auth::user());
 		// 以上3个一回事
-		if ($file = $request->file('file')) {
+		// dd($request->uploadfile, $request->files);
+		if ($file = $request->file('uploadfile')) {
 			$resize = $request->resize;
 			$type = $request->type ?? 'file';
-			$realPath = $request->realpath ?? false;
-			$folderName = '/uploads/' . $type . '/' . date('Y-m-d') . '/';
+			$path = $request->path ?? false;
+			$folderName = '/uploads/' . $type . '/' . $request->user()->id . '/' . date('Ymd') . '/';
 
 			$fileName = $file->getClientOriginalName();
 			$extension = $file->getClientOriginalExtension() ?: 'jpg';
 			$destinationPath = public_path($folderName);
-			$safeName = microtime() . '_' . str_random(10) . '.' . $extension;
+			$safeName = microtime(1) . '_' . str_random(10) . '.' . $extension;
 			$file->move($destinationPath, $safeName);
 			$imgPath = $destinationPath . $safeName;
-			if ($file->getClientOriginalExtension() != 'gif') {
+			if ($file->getClientOriginalExtension() != 'gif' && in_array($type, ['avatar', 'img', 'picture'])) {
 				$img = \Image::make($imgPath)->orientate()->encode($extension, 80);
 				if ($resize) {
 					$resize = explode('*', $resize);
@@ -36,7 +37,7 @@ class Controller extends BaseController {
 				$img->save();
 			}
 			$imgUrl = $folderName . $safeName;
-			$res = ['state' => true, 'msg' => null, 'url' => $imgUrl, 'path' => $realPath ? $imgPath : null];
+			$res = ['name' => $fileName, 'type' => $type, 'state' => true, 'msg' => null, 'url' => $imgUrl, 'path' => $path ? $imgPath : null];
 		} else {
 			$res = ['state' => false, 'msg' => '没有上传文件!', 'url' => null];
 		}
