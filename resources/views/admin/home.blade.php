@@ -5,121 +5,113 @@
 <li><a class="link-effect" href="">{{$location['name']}}</a></li>
 @endsection
 @section('content')
-<!-- Page Content -->
-<div class="content content-narrow">
-    <h2 class="content-heading" data-toggle="modal" data-target="#apps-modal2">头部</h2>
+<div class="content bg-gray-lighter">
+@php
+$tables = config('tables');
+$tableVari = 1;
+@endphp
+    @foreach($tables as $tableGroup => $table)
+    <h2 class="content-heading">{{$tableGroup}}</h2>
     <div class="row">
-        <div class="col-lg-6">
-            <!-- Lines Chart -->
-            <div class="block">
-                <div class="block-header">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">Lines</h3>
+        @foreach($table as $tKey =>$tVal)
+        <div class="col-sm-6 col-lg-3">
+        @switch($tVal['type'])
+        @case(1)
+            <a class="block block-link-hover3" href="{{$tVal['url'] ?? route('admin.'.$tKey.'.index')}}">
+                <div class="block">
+                    <div class="bg-image" style="background-image: url({{$tVal['background'] or '/assets/img/photos/photo'.$tableVari.'.jpg'}});">
+                        <div class="bg-black-op">
+                            <div class="block-content block-content-full text-center">
+                                <h3 class="h4 text-uppercase text-white push-5-t push-5">{{$tVal['title']}}</h3>
+                                <!-- <h4 class="h5 text-white-op push-20">公园概况</h4> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full">
+                        <div class="row text-center">
+                            {{$tVal['desc']}}
+                        </div>
+                    </div>
                 </div>
-                <div class="block-content block-content-full text-center">
-                    <!-- Lines Chart Container -->
-                    <div style="height: 330px;"><canvas class="js-chartjs-lines"></canvas></div>
+            </a>
+            @php
+            $tableVari++;
+            /*
+            <!--
+            <a class="block block-link-hover3" href="{{route('park.index')}}">
+                <img class="img-responsive" src="assets/img/photos/photo23.jpg" alt="">
+                <div class="block-content">
+                    <h4 class="push-10">公园概况</h4>
+                    <p>公园名称，级别，位置，类型，面积...</p>
                 </div>
-            </div>
-            <!-- END Lines Chart -->
+            </a> -->
+            */
+            @endphp
         </div>
-        <div class="col-lg-6">
-            <!-- Bars Chart -->
-            <div class="block">
-                <div class="block-header">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">Bars</h3>
+        @break
+        @case(2)
+                <div class="bg-image" style="background-image: url({{$tVal['background'] or '/assets/img/photos/photo'.$tableVari.'.jpg'}});">
+                    <div class="bg-black-op">
+                        <div class="block block-themed block-transparent">
+                            <div class="block-header">
+                                <!-- <h3 class="block-title text-center">{{$tableGroup}}</h3> -->
+                            </div>
+                            <div class="block-content block-content-full text-center">
+                                <h3 class="h1 font-w300 text-white">{{$tVal['title']}}</h3>
+                            </div>
+                            <div class="block-content block-content-full text-center">
+                                <a class="text-white" href="{{$tVal['url'] ?? route('admin.'.$tKey.'.index')}}">
+                                    {{$tVal['desc']}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="block-content block-content-full text-center">
-                    <!-- Bars Chart Container -->
-                    <div style="height: 330px;"><canvas class="js-chartjs-bars"></canvas></div>
-                </div>
+                @php
+                $tableVari++;
+                @endphp
             </div>
-            <!-- END Bars Chart -->
-        </div>
-        <div class="col-lg-6">
-            <!-- Radar Chart -->
-            <div class="block">
-                <div class="block-header">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">Radar</h3>
-                </div>
-                <div class="block-content block-content-full text-center">
-                    <!-- Radar Chart Container -->
-                    <div style="height: 330px;"><canvas class="js-chartjs-radar"></canvas></div>
-                </div>
+        @break
+        @case(3)
+                <a class="block block-link-hover3" href="{{$tVal['url'] ?? route('admin.'.$tKey.'.index')}}">
+                    <img class="img-responsive" src="{{$tVal['background'] or '/assets/img/photos/photo'.$tableVari.'.jpg'}}" alt="">
+                    <div class="block-content">
+                        <h4 class="push-10">{{$tVal['title']}}</h4>
+                        <p>{{$tVal['desc']}}</p>
+                    </div>
+                </a>
+                @php
+                $tableVari++;
+                @endphp
             </div>
-            <!-- END Radar Chart -->
-        </div>
-        <div class="col-lg-6">
-            <!-- Polar Area Chart -->
-            <div class="block">
-                <div class="block-header">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">Polar Area</h3>
-                </div>
-                <div class="block-content block-content-full text-center">
-                    <!-- Polar Area Chart Container -->
-                    <div style="height: 330px;"><canvas class="js-chartjs-polar"></canvas></div>
-                </div>
+        @break
+        @default
+                <a class="block block-link-hover3" href="{{$tVal['url'] ?? route('admin.'.$tKey.'.index')}}">
+                    <div class="block">
+                        <div class="bg-image" style="background-image: url({{$tVal['background'] or '/assets/img/photos/photo'.$tableVari.'.jpg'}});">
+                            <div class="bg-black-op">
+                                <div class="block-content block-content-full text-center">
+                                    <h3 class="h4 text-uppercase text-white push-5-t push-5">{{$tVal['title']}}</h3>
+                                    <!-- <h4 class="h5 text-white-op push-20">公园概况</h4> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-content block-content-full">
+                            <div class="row text-center">
+                                {{$tVal['desc']}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                @php
+                $tableVari++;
+                @endphp
             </div>
-            <!-- END Polar Area Chart -->
-        </div>
-        <div class="col-lg-6">
-            <!-- Pie Chart -->
-            <div class="block">
-                <div class="block-header">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">Pie</h3>
-                </div>
-                <div class="block-content block-content-full text-center">
-                    <!-- Pie Chart Container -->
-                    <div style="height: 330px;"><canvas class="js-chartjs-pie"></canvas></div>
-                </div>
-            </div>
-            <!-- END Pie Chart -->
-        </div>
-        <div class="col-lg-6">
-            <!-- Donut Chart -->
-            <div class="block">
-                <div class="block-header">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">Donut</h3>
-                </div>
-                <div class="block-content block-content-full text-center">
-                    <!-- Donut Chart Container -->
-                    <div style="height: 330px;"><canvas class="js-chartjs-donut"></canvas></div>
-                </div>
-            </div>
-            <!-- END Donut Chart -->
-        </div>
+        @endswitch
+        @endforeach
     </div>
+    @endforeach
 </div>
-<!-- END Page Content -->
 @component('admin.partials.modal',['theme'=>'dark'])
     @slot('id')
         apps-modal

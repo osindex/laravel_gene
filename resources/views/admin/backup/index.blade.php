@@ -56,14 +56,13 @@
 </div>
 @endsection
 @push('htmlstart')
-<link rel="stylesheet" type="text/css" href="{{ asset('vendor/css/pnotify.custom.min.css') }}">
+
 @endpush
 @push('htmlend')
     <!-- Ladda Buttons (loading buttons) -->
     <script src="{{ asset('vendor/js/spin.min.js') }}"></script>
     <script src="{{ asset('vendor/js/ladda.min.js') }}"></script>
-    <script src="{{ asset('vendor/js/pnotify.custom.min.js') }}"></script>
-
+    <!-- Page JS Plugins -->
 <script>
   jQuery(document).ready(function($) {
 
@@ -89,38 +88,26 @@
                 data: {_token: $('meta[name="csrf-token"]').attr('content')},
                 success: function(result) {
                     l.setProgress( 0.9 );
+                    console.log(result);
                     // Show an alert with the result
-                    if (result.indexOf('failed') >= 0) {
-                        new PNotify({
-                            title: "{{ trans('backup.create_warning_title') }}",
-                            text: "{{ trans('backup.create_warning_message') }}",
-                            type: "warning"
-                        });
+                    if (result === 'success') {
+                        swal("{{ trans('backup.create_confirmation_title') }}", "{{ trans('backup.create_confirmation_message') }}", 'success');
                     }
                     else
                     {
-                        new PNotify({
-                            title: "{{ trans('backup.create_confirmation_title') }}",
-                            text: "{{ trans('backup.create_confirmation_message') }}",
-                            type: "success"
-                        });
+                        swal("{{ trans('backup.create_warning_title') }}", "{{ trans('backup.create_warning_message') }}", 'error');
                     }
 
                     // Stop loading
                     l.setProgress( 1 );
                     l.stop();
-
                     // refresh the page to show the new file
                     setTimeout(function(){ location.reload(); }, 3000);
                 },
                 error: function(result) {
                     l.setProgress( 0.9 );
-                    // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backup.create_error_title') }}",
-                        text: "{{ trans('backup.create_error_message') }}",
-                        type: "warning"
-                    });
+                    swal("{{ trans('backup.create_error_title') }}", "{{ trans('backup.create_error_message') }}", 'error');
+
                     // Stop loading
                     l.stop();
                 }
@@ -133,37 +120,45 @@
         var delete_button = $(this);
         var delete_url = $(this).attr('href');
 
-        if (confirm("{{ trans('backup.delete_confirm') }}") == true) {
-            $.ajax({
+        swal({
+            title: "{{ trans('backup.delete_confirm') }}",
+            text: '请确认',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d26a5c',
+            confirmButtonText: '是的',
+            html: false,
+            preConfirm: function() {
+                return new Promise(function (resolve) {
+                    setTimeout(function () {
+                        resolve();
+                    }, 50);
+                });
+            }
+        }).then(function(result){
+            if (result.value) {
+                $.ajax({
                 url: delete_url,
                 data: {_token: $('meta[name="csrf-token"]').attr('content')},
                 type: 'DELETE',
                 success: function(result) {
                     // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backup.delete_confirmation_title') }}",
-                        text: "{{ trans('backup.delete_confirmation_message') }}",
-                        type: "success"
-                    });
+                    swal("{{ trans('backup.delete_confirmation_title') }}", "{{ trans('backup.delete_confirmation_message') }}", 'success');
                     // delete the row from the table
                     delete_button.parentsUntil('tr').parent().remove();
                 },
                 error: function(result) {
                     // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backup.delete_error_title') }}",
-                        text: "{{ trans('backup.delete_error_message') }}",
-                        type: "warning"
-                    });
+                    swal("{{ trans('backup.delete_error_title') }}", "{{ trans('backup.delete_error_message') }}", 'error');
                 }
-            });
-        } else {
-            new PNotify({
-                title: "{{ trans('backup.delete_cancel_title') }}",
-                text: "{{ trans('backup.delete_cancel_message') }}",
-                type: "info"
-            });
-        }
+                });
+                // swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
+                // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+            } else if (result.dismiss === 'cancel') {
+                swal("{{ trans('backup.delete_cancel_title') }}", "{{ trans('backup.delete_cancel_message') }}", 'info');
+            }
+        });
+
       });
 
   });

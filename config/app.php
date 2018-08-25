@@ -39,7 +39,7 @@ return [
 		    |
 	*/
 
-	'debug' => env('APP_DEBUG', false),
+	'debug' => env('APP_DEBUG', true),
 
 	/*
 		    |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 		    |
 	*/
 
-	'locale' => 'zh-CN',
+	'locale' => 'zh_CN',
 
 	/*
 		    |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [
 		    |
 	*/
 
-	'fallback_locale' => 'en',
+	'fallback_locale' => 'zh_cn',
 
 	/*
 		    |--------------------------------------------------------------------------
@@ -159,6 +159,7 @@ return [
 		// App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
+		Laravel\Passport\PassportServiceProvider::class,
 
 	],
 

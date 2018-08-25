@@ -13,12 +13,14 @@ class CreateNewsTable extends Migration {
 	public function up() {
 		Schema::create('news', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('title', 40)->comment('通讯稿名称');
-			$table->date('releasetime')->comment('发布时间');
-			$table->text('auther')->comment('作者');
-			$table->text('releasewebsite')->comment('发布的网站');
-			$table->text('contentsummary')->comment('内容摘要');
-			$table->text('note')->comment('备注');
+			$table->string('title')->comment('标题');
+			$table->text('auther')->nullable()->comment('作者');
+			$table->string('keyword')->nullable()->comment('关键词');
+			$table->string('img')->nullable()->comment('图片');
+
+			$table->text('content')->nullable()->comment('内容');
+			$table->date('published_at')->nullable()->comment('发布时间');
+			$table->text('note')->nullable()->comment('备注');
 			$table->softDeletes();
 			$table->timestamps();
 		});

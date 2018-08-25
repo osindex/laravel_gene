@@ -218,6 +218,8 @@ trait FilterAndSorting {
 					$query->orderBy($sort_arguments[0], $sort_direction);
 				}
 			}
+		} else {
+			$query->orderBy('id', 'desc');
 		}
 		return $query;
 	}

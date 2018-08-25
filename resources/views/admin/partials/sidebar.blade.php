@@ -49,7 +49,7 @@
                     </ul>
                 </div>
                 <a class="h5 text-white" href="{{route('admin')}}">
-                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">{{config('backname','GENE')}}</span>
+                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">{{config('app.name','基因')}}</span>
                 </a>
             </div>
             <!-- END Side Header -->
@@ -61,24 +61,29 @@
                     $menus = config('menu');
                     // dd($menus);
                     // 只写二级菜单
+                    $user = user();
                     @endphp
                     @foreach($menus as $menu)
-                    @if($menu['class']=='nav-main-heading')
-                        <li class="nav-main-heading"><span class="sidebar-mini-hide">{{$menu['title']}}</span></li>
-                    @else
-                        <li>
-                        @if($menu['children'])
-                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="{{$menu['class']}}"></i><span class="sidebar-mini-hide">{{$menu['title']}}</span></a>
-                            <ul>
-                            @foreach($menu['children'] as $msec)
-                            <li><a href="{{$msec['url']}}"><i class="{{$msec['class']}}"></i>{{$msec['title']}}</a></li>
-                            @endforeach
-                            </ul>
-                        @else
-                            <a href="{{$menu['url']}}"><i class="{{$menu['class']}}"></i><span class="sidebar-mini-hide">{{$menu['title']}}</span></a>
+                        @if(menuAuth($menu,$user))
+                            @if($menu['class']=='nav-main-heading')
+                                <li class="nav-main-heading"><span class="sidebar-mini-hide">{{$menu['title']}}</span></li>
+                            @else
+                                <li>
+                                @if($menu['children'])
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="{{$menu['class']}}"></i><span class="sidebar-mini-hide">{{$menu['title']}}</span></a>
+                                    <ul>
+                                    @foreach($menu['children'] as $msec)
+                                        @if(menuAuth($msec,$user))
+                                        <li><a href="{{$msec['url']}}"><i class="{{$msec['class']}}"></i>{{$msec['title']}}</a></li>
+                                        @endif
+                                    @endforeach
+                                    </ul>
+                                @else
+                                    <a href="{{$menu['url']}}"><i class="{{$menu['class']}}"></i><span class="sidebar-mini-hide">{{$menu['title']}}</span></a>
+                                @endif
+                                </li>
+                            @endif
                         @endif
-                        </li>
-                    @endif
                     @endforeach
                     <!-- <li>
                         <a href="base_pages_dashboard_v2.html"><i class="si si-rocket"></i><span class="sidebar-mini-hide">Dashboard v2</span></a>

@@ -31,10 +31,15 @@
     <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicons/apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon-180x180.png"> -->
     <!-- END Icons -->
+
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.css') }}">
+
     <!-- Web fonts -->
-    <link rel="stylesheet" href="https://fonts.proxy.ustclug.org/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+    <!-- <link rel="stylesheet" href="https://fonts.proxy.ustclug.org/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700"> -->
+    <link rel="stylesheet" href="{{ asset('assets/css/gfont.css') }}">
     @stack('htmlstart')
     <!-- Styles -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link id="css-main" href="{{ asset('assets/css/oneui.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>

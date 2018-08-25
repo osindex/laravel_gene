@@ -33,17 +33,21 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
 		// Route::get('map/map_animation', 'MapController@map_animation');
 		// Route::get('map/marker/{openid?}', 'MapController@markers_get');
 		// ['name' => 'admin', 'middleware' => ['role:super']],
-		Route::name('admin.')->middleware(['role:super'])->group(function () {
-			Route::resource('users', 'Admin\UserController');
-			Route::resource('roles', 'Admin\RoleController');
-			Route::resource('permissions', 'Admin\PermissionController');
+		Route::name('admin.')->group(function () {
+			Route::middleware(['role:super'])->group(function () {
+				Route::post('upload', 'Controller@upload')->name('upload');
+				Route::resource('users', 'Admin\UserController');
+				Route::resource('roles', 'Admin\RoleController');
+				Route::resource('permissions', 'Admin\PermissionController');
 
-			Route::get('backupcsv', 'Admin\BackupCSVController@index');
-			Route::post('backupcsv', 'Admin\BackupCSVController@import');
-			Route::get('backup', 'Admin\BackupController@index');
-			Route::put('backup/create', 'Admin\BackupController@create');
-			Route::get('backup/download/{file_name?}', 'Admin\BackupController@download');
-			Route::delete('backup/delete/{file_name?}', 'Admin\BackupController@delete')->where('file_name', '(.*)');
+				Route::get('backupcsv', 'Admin\BackupCSVController@index')->name('csv.index');
+				Route::post('backupcsv', 'Admin\BackupCSVController@import')->name('csv.post');
+				Route::get('backup', 'Admin\BackupController@index')->name('back.index');
+				Route::put('backup/create', 'Admin\BackupController@create')->name('back.put');
+				Route::get('backup/download/{file_name?}', 'Admin\BackupController@download')->name('back.down');
+				Route::delete('backup/delete/{file_name?}', 'Admin\BackupController@delete')->where('file_name', '(.*)')->name('back.delete');
+			});
+			Route::resource('news', 'Admin\NewsController');
 		});
 	});
 
